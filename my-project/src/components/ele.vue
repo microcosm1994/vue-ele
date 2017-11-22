@@ -13,12 +13,18 @@
       </div>
       <div class="ele-logo-photo"></div>
       <div class="ele-search">
-        <div class="ele-select">北京</div>
+        <div class="ele-select">
+          <div class="ele-select-address" v-on:click="getaddress">北京</div>
+        </div>
         <div class="ele-input">
           <input type="text" placeholder="请输入你的地址">
         </div>
         <div class="ele-search-btn">搜索</div>
+        <div class="address-box" v-if="addressBox">
+
+        </div>
       </div>
+
     </div>
     <div class="ele-qrcode-box">
       <div class="ele-qrcode">
@@ -48,7 +54,13 @@
     name: 'HelloWorld',
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        addressBox: false
+      }
+    },
+    methond: {
+      getaddress: function () {
+        this.addressBox = true
+        console.log(1)
       }
     }
   }

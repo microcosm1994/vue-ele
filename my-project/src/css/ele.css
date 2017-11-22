@@ -19,7 +19,7 @@ button {
   min-width: 1000px;
   height: 500px;
   background: #0089dc;
-  overflow: hidden;
+  border: 1px solid transparent;
 }
 .ele-container .ele-header {
   width: 1100px;
@@ -76,14 +76,21 @@ button {
   width: 700px;
   height: 56px;
   margin: 0 auto;
-  overflow: hidden;
   margin-top: 50px;
+  position: relative;
 }
 .ele-container .ele-search .ele-select {
   width: 100px;
   height: 56px;
   float: left;
-  background: #ffffff;
+  background: #fff;
+}
+.ele-container .ele-search .ele-select .ele-select-address {
+  width: 100%;
+  height: 56px;
+  text-align: center;
+  line-height: 56px;
+  cursor: pointer;
 }
 .ele-container .ele-search .ele-input {
   width: 410px;
@@ -115,6 +122,17 @@ button {
 }
 .ele-container .ele-search .ele-search-btn:hover {
   background: #E62625;
+}
+.ele-container .ele-search .address-box {
+  width: 650px;
+  height: 556px;
+  margin: 0 auto;
+  overflow: hidden;
+  margin-top: 50px;
+  background: #ffffff;
+  z-index: 1;
+  position: absolute;
+  top: 56px;
 }
 .ele-qrcode-box {
   width: 1000px;
