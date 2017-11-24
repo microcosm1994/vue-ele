@@ -12,6 +12,7 @@ input, button {
   background: transparent;
   outline: none;
 }
+
 .ele-container {
   width: 100%;
   min-width: 1000px;
@@ -121,14 +122,24 @@ input, button {
     }
     .address-box{
       width: 650px;
-      height: 556px;
+      height: 400px;
       margin: 0 auto;
       overflow: hidden;
       margin-top: 50px;
-      background: #ffffff;
+      background: #fff;
       z-index: 1;
       position: absolute;
       top:56px;
+      transition:all 0.5s linear;
+    }
+    .fade-transition{
+      opacity: 1;
+      transform: translate3d(0,0,0);
+    }
+    .fade-enter-active,.fade-leave-active{
+      opacity: 0;
+      transform: translate3d(0,-20px,0);
+      height: 20px;
     }
   }
 }

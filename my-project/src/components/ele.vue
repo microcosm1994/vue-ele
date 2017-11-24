@@ -14,17 +14,16 @@
       <div class="ele-logo-photo"></div>
       <div class="ele-search">
         <div class="ele-select">
-          <div class="ele-select-address" v-on:click="getaddress">北京</div>
+          <div class="ele-select-address" v-on:click="getaddress()">北京</div>
         </div>
         <div class="ele-input">
           <input type="text" placeholder="请输入你的地址">
         </div>
         <div class="ele-search-btn">搜索</div>
-        <div class="address-box" v-if="addressBox">
-
-        </div>
+        <transition name="fade">
+          <div class="address-box" v-if="addressBox"></div>
+        </transition>
       </div>
-
     </div>
     <div class="ele-qrcode-box">
       <div class="ele-qrcode">
@@ -57,10 +56,9 @@
         addressBox: false
       }
     },
-    methond: {
+    methods: {
       getaddress: function () {
-        this.addressBox = true
-        console.log(1)
+        (this.addressBox === false) ? this.addressBox = true : this.addressBox = false
       }
     }
   }

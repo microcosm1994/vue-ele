@@ -125,14 +125,25 @@ button {
 }
 .ele-container .ele-search .address-box {
   width: 650px;
-  height: 556px;
+  height: 400px;
   margin: 0 auto;
   overflow: hidden;
   margin-top: 50px;
-  background: #ffffff;
+  background: #fff;
   z-index: 1;
   position: absolute;
   top: 56px;
+  transition: all 0.5s linear;
+}
+.ele-container .ele-search .fade-transition {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.ele-container .ele-search .fade-enter-active,
+.ele-container .ele-search .fade-leave-active {
+  opacity: 0;
+  transform: translate3d(0, -20px, 0);
+  height: 20px;
 }
 .ele-qrcode-box {
   width: 1000px;
