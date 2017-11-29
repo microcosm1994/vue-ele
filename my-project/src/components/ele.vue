@@ -14,14 +14,32 @@
       <div class="ele-logo-photo"></div>
       <div class="ele-search">
         <div class="ele-select">
-          <div class="ele-select-address" v-on:click="getaddress()">北京</div>
+          <div class="ele-select-address" v-on:click="getaddress();getAddress()">{{ selectCity }}</div>
         </div>
         <div class="ele-input">
-          <input type="text" placeholder="请输入你的地址">
+          <input type="text" placeholder="请输入你的地址" v-model="searchText" v-on:keyup="prompt()">
+          <transition name="fade1">
+            <div class="prompt-box" v-if="promptShow">
+              <ul>
+                <li v-for="key in promptName" v-on:click="setregion($event,key.location.lat,key.location.lng)">{{key.name}}</li>
+              </ul>
+            </div>
+          </transition>
         </div>
         <div class="ele-search-btn">搜索</div>
         <transition name="fade">
-          <div class="address-box" v-if="addressBox"></div>
+          <div class="address-box" v-if="addressBox" ref="address">
+            <div class="ele-region" v-for="(key, index) in city" style="width:100%;height:auto;text-align: center;">
+              <div class="ele-index" style="height:auto;">
+                {{index}}
+              </div>
+              <div class="ele-region-box">
+                <a href="javascript:;" v-for="value in key" v-on:click="setaddress($event)">
+                  {{value.name}}
+                </a>
+              </div>
+            </div>
+          </div>
         </transition>
       </div>
     </div>
@@ -53,12 +71,84 @@
     name: 'HelloWorld',
     data () {
       return {
-        addressBox: false
+        ak: 'qkKs9dxI75yUR1HSP9TPuV1pQnLgRp2o',
+        addressBox: false,
+        city: '',
+        citytype: [],
+        selectCity: '',
+        searchText: '',
+        localtionX: '',
+        localtionY: '',
+        promptShow: false,
+        promptName: []
       }
+    },
+    mounted () {
+      this.getLocation()
     },
     methods: {
       getaddress: function () {
-        (this.addressBox === false) ? this.addressBox = true : this.addressBox = false
+        this.addressBox = !this.addressBox
+      },
+      getAddress: function () {
+        let self = this
+        this.$http.get('http://jklib.org/ele/cities.ashx').then(response => {
+          let data = response.data
+          self.city = data
+          for (let key in data) {
+            self.citytype.push(key)
+          }
+          console.log(self.citytype)
+        }, response => {
+          console.log('error')
+        })
+      },
+      setaddress: function (e) {
+        this.selectCity = e.target.innerText
+      },
+      getLocation () {
+        let self = this
+        self.$http.jsonp('http://api.map.baidu.com/location/ip?ak=' + self.ak + '&coor=bd09ll').then(response => {
+          let data = response.data
+          if (data) {
+            self.selectCity = data.content.address
+          }
+        }, response => {
+          console.log('error')
+        })
+      },
+      prompt: function () {
+        let self = this
+        let url = 'http://api.map.baidu.com/place/v2/suggestion?query=' + this.searchText + '&region=' + this.selectCity + '&output=json&ak=' + this.ak + ''
+        if (this.searchText !== '') {
+          this.promptShow = true
+        } else {
+          this.promptName = ''
+          this.promptShow = false
+        }
+        this.$http.jsonp(url).then(response => {
+          let data = response.data
+          console.log(data)
+          if (data) {
+            self.promptName = data.result
+          }
+        }, response => {})
+      },
+      setregion: function (e, lat, lng) {
+        this.searchText = e.target.innerText
+        this.localtionX = lat
+        this.localtionY = lng
+        this.search()
+      },
+      search: function () {
+        let url = 'http://api.map.baidu.com/place/v2/search?query=' + this.searchText + '&tag=美食&location=' + this.localtionX + ',' + this.localtionY + '&radius=2000&output=json&ak=' + this.ak + ''
+        console.log(url)
+        this.$http.jsonp(url).then(response => {
+          let data = response.data
+          console.log(data)
+        }, response => {
+          console.log('error')
+        })
       }
     }
   }
@@ -66,5 +156,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  @import "../css/ele.css";
+  @import "../../static/css/ele.css";
 </style>
