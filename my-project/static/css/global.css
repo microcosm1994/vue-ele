@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  height: 0;
+  box-sizing: border-box;
+}
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+input,
+button {
+  border: none;
+  background: transparent;
+  outline: none;
+}

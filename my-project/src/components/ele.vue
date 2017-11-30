@@ -21,7 +21,7 @@
           <transition name="fade1">
             <div class="prompt-box" v-if="promptShow">
               <ul>
-                <li v-for="key in promptName" v-on:click="setregion($event,key.location.lat,key.location.lng)">{{key.name}}</li>
+                <li v-for="key in promptName" v-on:click="setregion($event,key.location.lat,key.location.lng)"><router-link to="/result">{{key.name}}</router-link></li>
               </ul>
             </div>
           </transition>
@@ -68,7 +68,7 @@
 
 <script>
   export default {
-    name: 'HelloWorld',
+    name: 'ele',
     data () {
       return {
         ak: 'qkKs9dxI75yUR1HSP9TPuV1pQnLgRp2o',
@@ -156,5 +156,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+  @import "../../static/css/global.css";
   @import "../../static/css/ele.css";
 </style>
