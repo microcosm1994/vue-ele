@@ -27,6 +27,7 @@
 <script>
   import headers from './headers'
   import store from '../store/store'
+
   export default {
     name: 'result',
     components: {
@@ -38,7 +39,25 @@
       }
     },
     store,
-    methods: {}
+    mounted () {
+      this.getInfo()
+    },
+    methods: {
+      getInfo: function () {
+        let url = this.$store.state.business
+        console.log(url)
+        if (url) {
+          this.$http.jsonp(url).then(response => {
+            let data = response.data
+            if (data) {
+              console.log(data)
+            }
+          }, response => {
+            console.log('error')
+          })
+        }
+      }
+    }
   }
 </script>
 <style>

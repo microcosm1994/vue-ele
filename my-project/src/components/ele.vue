@@ -26,7 +26,7 @@
             </div>
           </transition>
         </div>
-        <div class="ele-search-btn">搜索</div>
+        <div class="ele-search-btn"><router-link to="/result">搜索</router-link></div>
         <transition name="fade">
           <div class="address-box" v-if="addressBox" ref="address">
             <div class="ele-region" v-for="(key, index) in city" style="width:100%;height:auto;text-align: center;">
@@ -67,8 +67,10 @@
 </template>
 
 <script>
+  import store from '../store/store'
   export default {
     name: 'ele',
+    store,
     data () {
       return {
         ak: 'qkKs9dxI75yUR1HSP9TPuV1pQnLgRp2o',
@@ -120,6 +122,7 @@
       prompt: function () {
         let self = this
         let url = 'http://api.map.baidu.com/place/v2/suggestion?query=' + this.searchText + '&region=' + this.selectCity + '&output=json&ak=' + this.ak + ''
+        this.$store.state.url = url
         if (this.searchText !== '') {
           this.promptShow = true
         } else {
@@ -128,7 +131,6 @@
         }
         this.$http.jsonp(url).then(response => {
           let data = response.data
-          console.log(data)
           if (data) {
             self.promptName = data.result
           }
@@ -142,13 +144,7 @@
       },
       search: function () {
         let url = 'http://api.map.baidu.com/place/v2/search?query=' + this.searchText + '&tag=美食&location=' + this.localtionX + ',' + this.localtionY + '&radius=2000&output=json&ak=' + this.ak + ''
-        console.log(url)
-        this.$http.jsonp(url).then(response => {
-          let data = response.data
-          console.log(data)
-        }, response => {
-          console.log('error')
-        })
+        this.$store.state.business = url
       }
     }
   }

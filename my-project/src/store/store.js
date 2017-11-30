@@ -4,7 +4,8 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  count: 1
+  count: 1,
+  business: ''
 }
 const mutations = {
   add (state) {
@@ -14,6 +15,7 @@ const mutations = {
     state.count -= 1
   }
 }
+
 export default new Vuex.Store({
   state,
   mutations

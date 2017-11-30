@@ -134,12 +134,17 @@
   height: 56px;
   float: left;
   background: #F74342;
-  color: #fff;
   text-align: center;
   line-height: 56px;
   margin-left: 12px;
   border-radius: 4px;
   cursor: pointer;
+}
+.ele-container .ele-search .ele-search-btn a {
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: #fff;
   font-size: 18px;
 }
 .ele-container .ele-search .ele-search-btn:hover {
