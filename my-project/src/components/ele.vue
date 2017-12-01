@@ -26,7 +26,7 @@
             </div>
           </transition>
         </div>
-        <div class="ele-search-btn"><router-link to="/result">搜索</router-link></div>
+        <div class="ele-search-btn" v-on:click="search()"><router-link to="/result">搜索</router-link></div>
         <transition name="fade">
           <div class="address-box" v-if="addressBox" ref="address">
             <div class="ele-region" v-for="(key, index) in city" style="width:100%;height:auto;text-align: center;">
@@ -122,7 +122,7 @@
       prompt: function () {
         let self = this
         let url = 'http://api.map.baidu.com/place/v2/suggestion?query=' + this.searchText + '&region=' + this.selectCity + '&output=json&ak=' + this.ak + ''
-        this.$store.state.url = url
+        this.$store.state.city = this.searchText
         if (this.searchText !== '') {
           this.promptShow = true
         } else {
@@ -131,20 +131,30 @@
         }
         this.$http.jsonp(url).then(response => {
           let data = response.data
-          if (data) {
+          if (data.status === 0) {
             self.promptName = data.result
+            console.log(data)
           }
         }, response => {})
       },
       setregion: function (e, lat, lng) {
         this.searchText = e.target.innerText
-        this.localtionX = lat
-        this.localtionY = lng
-        this.search()
+        this.$store.state.locationX = lat
+        this.$store.state.locationY = lng
+        let url = 'http://api.map.baidu.com/place/v2/search?query=' + this.searchText + '&tag=美食&page_size=20&page_num=0&location=' + this.$store.state.locationX + ',' + this.$store.state.locationY + '&radius=2000&scope=2&output=json&ak=' + this.ak + ''
+        this.$store.state.business = url
       },
       search: function () {
-        let url = 'http://api.map.baidu.com/place/v2/search?query=' + this.searchText + '&tag=美食&location=' + this.localtionX + ',' + this.localtionY + '&radius=2000&output=json&ak=' + this.ak + ''
-        this.$store.state.business = url
+        this.$http.jsonp('http://api.map.baidu.com/place/v2/search?query=' + this.searchText + '&region=' + this.selectCity + '&city_limit=true&output=json&ak=' + this.$store.state.ak + '').then(response => {
+          let data = response.data
+          if (data.status === 0) {
+            this.$store.state.locationX = data.results[0].location.lat
+            this.$store.state.locationY = data.results[0].location.lng
+            console.log(data)
+          }
+        }, response => {
+          console.log('error')
+        })
       }
     }
   }

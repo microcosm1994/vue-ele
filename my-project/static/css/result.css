@@ -75,7 +75,101 @@ body {
 }
 .result-main .result-container {
   width: 100%;
-  height: 60px;
+  height: auto;
   margin-top: 20px;
+  text-align: left;
   border: 2px solid #E6E6E6;
+}
+.result-main .result-container .result-shop-box {
+  width: 25%;
+  height: 140px;
+  display: inline-block;
+  vertical-align: top;
+  border-bottom: 1px solid #999999;
+}
+.result-main .result-container .result-shop-box .result-shop {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 20px;
+}
+.result-main .result-container .result-shop-box .result-shop .shop-photo {
+  float: left;
+  width: 110px;
+  height: 100%;
+}
+.result-main .result-container .result-shop-box .result-shop .shop-photo img {
+  width: 70px;
+  height: 70px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  background: #e2e2e2;
+}
+.result-main .result-container .result-shop-box .result-shop .shop-photo p {
+  height: 30px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #999999;
+}
+.result-main .result-container .result-shop-box .result-shop .shop-info {
+  width: 120px;
+  height: 100%;
+  float: left;
+  margin-left: 20px;
+}
+.result-main .result-container .result-shop-box .result-shop .shop-info h3 {
+  height: 24px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  color: #000;
+  line-height: 24px;
+}
+.result-main .result-container .result-shop-box .result-shop .shop-info .shop-star {
+  height: 20px;
+  text-align: left;
+  font-size: 12px;
+}
+.result-main .result-container .result-shop-box .result-shop .shop-info .shop-star span {
+  display: inline-block;
+  height: 20px;
+  color: #999999;
+}
+.result-main .result-container .result-shop-box .result-shop .shop-info .shop-star i {
+  font-size: 12px;
+  line-height: 20px;
+  color: #999999;
+}
+.result-main .result-container .result-shop-box .result-shop .shop-info p {
+  color: #999999;
+}
+.result-main .result-container .result-shop-box .result-shop .shop-info .shop-guarantee {
+  height: 20px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.result-main .result-container .result-shop-box .result-shop:hover {
+  background: #F5F5F5;
+}
+.result-main .result-container .result-shop-box .result-shop-detail {
+  display: none;
+}
+.result-main .result-container p {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 14px;
+  color: #666666;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.result-main .result-container p:hover {
+  color: red;
 }

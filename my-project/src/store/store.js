@@ -4,8 +4,11 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  count: 1,
-  business: ''
+  city: '',
+  business: '',
+  ak: 'qkKs9dxI75yUR1HSP9TPuV1pQnLgRp2o',
+  locationX: '',
+  locationy: ''
 }
 const mutations = {
   add (state) {
