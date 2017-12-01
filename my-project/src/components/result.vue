@@ -71,7 +71,7 @@
       return {
         shop: [],
         shopDetail: [],
-        page: 1
+        page: 0
       }
     },
     store,

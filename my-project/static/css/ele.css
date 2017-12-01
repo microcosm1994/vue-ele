@@ -4,6 +4,7 @@
   height: 500px;
   background: #0089dc;
   border: 1px solid transparent;
+  overflow: hidden;
 }
 .ele-container .ele-header {
   width: 1100px;

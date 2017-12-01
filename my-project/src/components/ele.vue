@@ -139,6 +139,7 @@
       },
       setregion: function (e, lat, lng) {
         this.searchText = e.target.innerText
+        this.$store.state.city = this.searchText
         this.$store.state.locationX = lat
         this.$store.state.locationY = lng
         let url = 'http://api.map.baidu.com/place/v2/search?query=' + this.searchText + '&tag=美食&page_size=20&page_num=0&location=' + this.$store.state.locationX + ',' + this.$store.state.locationY + '&radius=2000&scope=2&output=json&ak=' + this.ak + ''
